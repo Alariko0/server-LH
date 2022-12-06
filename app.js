@@ -1,6 +1,13 @@
-// ℹ️ Gets access to environment variables/settings
-// https://www.npmjs.com/package/dotenv
-require("dotenv").config();
+const dotenv = require('dotenv')
+const morgan = require('morgan')
+const cors = require('cors')
+const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
+
+
+const router = require('./routes/index.routes')
+
+dotenv.config()
 
 // ℹ️ Connects to the database
 require("./db");
