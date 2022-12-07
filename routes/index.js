@@ -1,4 +1,6 @@
-const { application } = require('express')
+//poner rutas aqui para no poner en app.js archivos, use
+
+const { app } = require('express')
 const express = require('express')
 const isLoggedIn = require('../middleware/isLoggedIn')
 const router = express.Router()
