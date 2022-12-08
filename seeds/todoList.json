@@ -11,7 +11,7 @@
                     "job": "5 puntos de agua: Ducha, lavamanos, WC",
                     "completed": false
                 },
-                "constructionorker": {
+                "constructionWorker": {
                     "job": {
                         "walls": {
                             "task": "Plaquetas de blanco perla 10x10, 5,5 m2",

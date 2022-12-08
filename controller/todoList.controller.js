@@ -30,10 +30,10 @@ const getOne = (req, res) => {
 const postCreate = (req, res) => {
     const {
         name,
-        task
+        tasks,
     } = req.body
     console.log(req.body)
-    Todo.create({ name, task })
+    Todo.create({ name, tasks })
         .then((data) => {
             console.log({ data });
             res.json({ message: "todo added successfully", data });
