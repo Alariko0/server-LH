@@ -17,10 +17,10 @@ router.post('/create', postCreate)
 
 // PUT
 
-router.put('/update', putUpdate)
+router.put('/:update', putUpdate)
 
 // DELETE
 
-router.delete('/delete', deleteTodo)
+router.delete('/:delete', deleteTodo)
 
 module.exports = router

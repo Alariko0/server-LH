@@ -4,7 +4,7 @@ const SALT_ROUNDS = 10
 const { ENUM_ROLES } = require('../const/userRoles')
 const userSchema = new Schema(
   {
-    username: {
+    userName: {
       type: String,
       trim: true,
       required: false,

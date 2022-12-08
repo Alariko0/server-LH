@@ -15,9 +15,9 @@ const getAll = (req, res) => {
 
 
 const getOne = (req, res) => {
-    Todo.find()
+    Todo.findById(req.params.id)
         .then((todo) => {
-            console.log({ todo })
+            console.log({})
             res.json(todo)
         })
         .catch((err) =>
@@ -30,7 +30,7 @@ const getOne = (req, res) => {
 const postCreate = (req, res) => {
     const {
         name,
-        tasks,
+        tasks
     } = req.body
     console.log(req.body)
     Todo.create({ name, tasks })
@@ -53,7 +53,7 @@ const postCreate = (req, res) => {
 const putUpdate = (req, res) => {
     console.log("id: ", req.params.id);
     console.log("body: ", req.body);
-    Todo.findByIdAndUpdate(req.params.id, req.body)
+    Todo.findByIdAndUpdate(req.params.upDate, req.body)
         .then((todo) => {
             console.log("edit", { todo });
             return res.json({ message: "updated successfully", todo });
@@ -65,14 +65,15 @@ const putUpdate = (req, res) => {
         );
 };
 const deleteTodo = (req, res) => {
-    Todo.findByIdAndRemove(req.params.id, req.body).then((data) =>
+    Todo.findByIdAndRemove(req.params.delete).then((data) =>
         res
             .json({ message: "todo deleted successfully", data })
-            .catch((err) =>
-                res
-                    .status(404)
-                    .json({ error: "book not found", message: err.message })
-            )
+
+    ).catch((err) => {
+        res
+            .status(404)
+            .json({ error: "book not found", message: err.message })
+    }
     )
 }
 
