@@ -1,12 +1,9 @@
 // CRUD
 const router = require('express').Router()
+//const validateToken = require('../middleware/validateToken.midleware')
 
-const {
-    getAll,
-    getOne,
-    create,
-    updateOne,
-    deleteOne,
+const { getAll, getOne, postCreate, putUpdate, deleteTodo
+
 } = require('../controller/todoList.controller')
 
 // GET
@@ -16,15 +13,14 @@ router.get('/:id', getOne)
 
 // POST
 
-router.post('/', create)
-
+router.post('/create', postCreate)
 
 // PUT
 
-router.put('/:id', updateOne)
+router.put('/update', putUpdate)
 
 // DELETE
 
-router.delete('/:id', deleteOne)
+router.delete('/delete', deleteTodo)
 
 module.exports = router

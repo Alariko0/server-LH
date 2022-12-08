@@ -1,6 +1,6 @@
-const Todo = require("../models/todo");
+const Todo = require("../models/todoModels");
 
-exports.getAllTodo = (req, res) => {
+const getAll = (req, res) => {
     Todo.find()
         .then((todo) => {
             console.log({ todo });
@@ -13,23 +13,44 @@ exports.getAllTodo = (req, res) => {
         );
 };
 
-// GETONE falta
 
-exports.postCreateTodo = (req, res) => {
-    Todo.create(req.body)
+const getOne = (req, res) => {
+    Todo.find()
+        .then((todo) => {
+            console.log({ todo })
+            res.json(todo)
+        })
+        .catch((err) =>
+            res
+                .status(404)
+                .json({ message: "no todo found", error: err.message })
+        )
+}
+
+const postCreate = (req, res) => {
+    const {
+        name,
+        task
+    } = req.body
+    console.log(req.body)
+    Todo.create({ name, task })
         .then((data) => {
             console.log({ data });
             res.json({ message: "todo added successfully", data });
         })
-        .catch((err) =>
+        .catch((err) => {
+            console.log(err)
             res.status(400).json({
                 message: "unable to add new todo",
                 error: err.message,
             })
+
+        }
+
         );
 };
 
-exports.putUpdateTodo = (req, res) => {
+const putUpdate = (req, res) => {
     console.log("id: ", req.params.id);
     console.log("body: ", req.body);
     Todo.findByIdAndUpdate(req.params.id, req.body)
@@ -43,8 +64,7 @@ exports.putUpdateTodo = (req, res) => {
                 .json({ error: "unable to update todo", message: err.message })
         );
 };
-
-exports.deleteTodo = (req, res) => {
+const deleteTodo = (req, res) => {
     Todo.findByIdAndRemove(req.params.id, req.body).then((data) =>
         res
             .json({ message: "todo deleted successfully", data })
@@ -53,5 +73,14 @@ exports.deleteTodo = (req, res) => {
                     .status(404)
                     .json({ error: "book not found", message: err.message })
             )
-    );
-};
+    )
+}
+
+module.exports = { getAll, getOne, postCreate, putUpdate, deleteTodo }
+
+
+
+
+//------------------------------
+
+

@@ -24,8 +24,8 @@ require("./config")(app);
 
 
 
-const authRoutes = require("./routes/auth.routes");
-app.use("/auth", authRoutes);
+require("./routes/index")(app)
+
 
 
 require("./error-handling")(app);
