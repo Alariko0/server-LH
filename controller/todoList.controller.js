@@ -51,9 +51,10 @@ const postCreate = (req, res) => {
 };
 
 const putUpdate = (req, res) => {
-    console.log("id: ", req.params.id);
-    console.log("body: ", req.body);
-    Todo.findByIdAndUpdate(req.params.upDate, req.body)
+    //  console.log("id: ", req.params.id);
+    //  console.log("body: ", req.body);
+    console.log("------> este ", req.params)
+    Todo.findByIdAndUpdate(req.params.update, req.body)
         .then((todo) => {
             console.log("edit", { todo });
             return res.json({ message: "updated successfully", todo });

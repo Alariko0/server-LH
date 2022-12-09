@@ -1,14 +1,14 @@
-const { verifyJwt } = require('../utils/jwt.util');
-const { deleteBearer } = require('../utils/string.util');
+const { verifyJwt } = require('../utils/jwt.utils');
+const { deleteBearer } = require('../utils/string.utils');
 
 const validateToken = (req, res, next) => {
     const { authorization } = req.headers;
 
     if (authorization) {
         const token = deleteBearer(authorization);
-        const { sub, email } = verifyJwt(token);
+        const { sub, email, role } = verifyJwt(token);
 
-        req.user = { _id: sub, email };
+        req.user = { _id: sub, email, role };
     } else {
         res.sendStatus(401);
         return;
