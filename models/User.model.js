@@ -4,11 +4,12 @@ const SALT_ROUNDS = 10
 const { ENUM_ROLES } = require('../const/userRoles')
 const userSchema = new Schema(
   {
-    userName: {
+    name: {
       type: String,
+      required: true,
       trim: true,
-      required: false,
-      unique: true,
+      uppercase: true,
+      unique: true
     },
     email: {
       type: String,
@@ -25,19 +26,13 @@ const userSchema = new Schema(
       type: String,
       trim: true,
       enum: ENUM_ROLES,
+      default: 'User',
     }
   },
   {
     timestamps: true,
   }
 )
-userSchema.pre('save', function (next) {
-  if (this.isNew) {
-    const salt = bcrypt.genSaltSync(SALT_ROUNDS)
-    const hash1 = bcrypt.hashSync(this.password, salt)
-    this.password = hash1
-  }
-  next()
-})
+
 const UserModel = model('User', userSchema)
 module.exports = UserModel

@@ -7,7 +7,7 @@ const MESSAGE_ERROR_EMAIL = 'Email ya está en uso.';
 const MESSAGE_ERROR_LOGIN = 'Email o contraseña no es correcto.';
 
 const SignupController = (req, res, next) => {
-    const { email, password } = req.body;
+    const { email, password, name, role } = req.body;
     UserModel.findOne({ email })
         .then((user) => {
             if (user) {
@@ -16,7 +16,7 @@ const SignupController = (req, res, next) => {
             const saltBcrypt = bcrypt.genSaltSync(SALT);
             const hashBcrypt = bcrypt.hashSync(password, saltBcrypt);
 
-            return UserModel.create({ email, password: hashBcrypt });
+            return UserModel.create({ email, password: hashBcrypt, name, role });
         })
         .then(() => {
             res.sendStatus(201);
@@ -32,7 +32,7 @@ const SignupController = (req, res, next) => {
 const LoginController = (req, res, next) => {
     const { email, password } = req.body;
 
-    UserModel.findOne({ email })
+    UserModel.findOne({ email, password })
         .then((user) => {
             if (user && bcrypt.compareSync(password, user.password)) {
                 res.status(200).json({ token: signJwt(user._id.toString(), user.email) });
