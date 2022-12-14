@@ -27,7 +27,10 @@ const ToDoSchema = new mongoose.Schema({
                     },
                     completed: { type: Boolean }
                 },
-                completed: { type: Boolean }
+                completed: {
+                    type: Boolean,
+                    default: false
+                }
             }
         }
     },
